@@ -177,7 +177,7 @@ func colorParser(args []string) ([]bgp.ExtendedCommunityInterface, error) {
         if err != nil {
                 return nil, fmt.Errorf("invalid color")
         }
-        Value2 := uint16(i64 >> 32)
+        Value2 := uint16(color >> 32)
         Value := uint32(uint64(color) - uint64(Value2) << 32)
         isTransitive := true
         o := bgp.NewOpaqueExtended(isTransitive)
