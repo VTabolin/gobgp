@@ -127,6 +127,7 @@ const (
 	EC_SUBTYPE_MAC_MOBILITY ExtendedCommunityAttrSubType = 0x00 // EC_TYPE: 0x06
 	EC_SUBTYPE_ESI_LABEL    ExtendedCommunityAttrSubType = 0x01 // EC_TYPE: 0x06
 	EC_SUBTYPE_ES_IMPORT    ExtendedCommunityAttrSubType = 0x02 // EC_TYPE: 0x06
+        EC_SUBTYPE_EVPN_ROUTER  ExtendedCommunityAttrSubType = 0x03 // EC_TYPE: 0x06
 
 	EC_SUBTYPE_UUID_BASED_RT ExtendedCommunityAttrSubType = 0x11
 )
@@ -5873,6 +5874,10 @@ func parseEvpnExtended(data []byte) (ExtendedCommunityInterface, error) {
 			Sequence: seq,
 			IsSticky: isSticky,
 		}, nil
+        case EC_SUBTYPE_EVPN_ROUTER:
+                return &ESImportRouteTarget{
+                        ESImport: net.HardwareAddr(data[2:8]),
+                }, nil
 	}
 	return nil, NewMessageError(BGP_ERROR_UPDATE_MESSAGE_ERROR, BGP_ERROR_SUB_MALFORMED_ATTRIBUTE_LIST, nil, fmt.Sprintf("unknown evpn subtype: %d", subType))
 }
