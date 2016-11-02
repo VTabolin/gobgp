@@ -5554,18 +5554,20 @@ func (e *ValidationExtended) String() string {
 }
 
 type ColorExtended struct {
-	Value uint32
+	ValueLowBits uint32		//Four octets value specific
+        ValueHighBits uint16	//Two octets value specific
 }
 
 func (e *ColorExtended) Serialize() ([]byte, error) {
 	buf := make([]byte, 7)
 	buf[0] = byte(EC_SUBTYPE_COLOR)
-	binary.BigEndian.PutUint32(buf[3:], uint32(e.Value))
+        binary.BigEndian.PutUint16(buf[1:], uint16(e.ValueHighBits))
+	binary.BigEndian.PutUint32(buf[3:], uint32(e.ValueLowBits))
 	return buf, nil
 }
 
 func (e *ColorExtended) String() string {
-	return fmt.Sprintf("%d", e.Value)
+	return fmt.Sprintf("%d, %d", e.ValueHighBits, ValueLowBits)
 }
 
 type EncapExtended struct {
@@ -5620,9 +5622,11 @@ func (e *OpaqueExtended) DecodeFromBytes(data []byte) error {
 		switch e.SubType {
 		case EC_SUBTYPE_COLOR:
 			v := binary.BigEndian.Uint32(data[3:7])
-			e.Value = &ColorExtended{
-				Value: v,
-			}
+                        v2 := binary.BigEndian.Uint16(data[1:3])
+                        e.Value = &ColorExtended{
+                                ValueLowBits: v,
+                                ValueHighBits: v2,
+                        }
 		case EC_SUBTYPE_ENCAPSULATION:
 			t := TunnelType(binary.BigEndian.Uint16(data[5:7]))
 			e.Value = &EncapExtended{
