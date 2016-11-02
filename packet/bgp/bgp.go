@@ -5567,7 +5567,7 @@ func (e *ColorExtended) Serialize() ([]byte, error) {
 }
 
 func (e *ColorExtended) String() string {
-	return fmt.Sprintf("%d, %d", e.ValueHighBits, ValueLowBits)
+	return fmt.Sprintf("%d, %d", e.ValueHighBits, e.ValueLowBits)
 }
 
 type EncapExtended struct {
