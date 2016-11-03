@@ -20,7 +20,15 @@ No dependency hell (library, package, etc) thanks to Go.
 
 ## Documentation
 
+## Simple CLI EVPN inject
+
+gobgp global rib add -a evpn macadv 32:77:ad:6a:22:a9 192.168.8.109 0 1677141 rd 65534:54880 encap vxlan
+color 105553116266496 color 37383395344384 color 17592186059776 mobility 0 nexthop 10.10.10.5
+
+color must be at DEC format
+
 ### Using GoBGP
+
  * [Getting Started](https://github.com/osrg/gobgp/blob/master/docs/sources/getting-started.md)
  * CLI
   * [Typical operation examples](https://github.com/osrg/gobgp/blob/master/docs/sources/cli-operations.md)
