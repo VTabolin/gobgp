@@ -46,6 +46,7 @@ const (
 	NOT_FOUND
 	INVALID
         COLOR
+	MOBILITY
 )
 
 var ExtCommNameMap = map[ExtCommType]string{
@@ -61,6 +62,7 @@ var ExtCommNameMap = map[ExtCommType]string{
 	NOT_FOUND: "not-found",
 	INVALID:   "invalid",
         COLOR:     "color",
+	MOBILITY:  "mobility",
 }
 
 var ExtCommValueMap = map[string]ExtCommType{
@@ -76,6 +78,7 @@ var ExtCommValueMap = map[string]ExtCommType{
 	ExtCommNameMap[NOT_FOUND]: NOT_FOUND,
 	ExtCommNameMap[INVALID]:   INVALID,
         ExtCommNameMap[COLOR]:     COLOR,
+        ExtCommNameMap[MOBILITY]:  MOBILITY,
 }
 
 func rateLimitParser(args []string) ([]bgp.ExtendedCommunityInterface, error) {
@@ -186,6 +189,23 @@ func colorParser(args []string) ([]bgp.ExtendedCommunityInterface, error) {
         return []bgp.ExtendedCommunityInterface{o}, nil
 }
 
+func mobilityParcer(args []string) ([]bgp.ExtendedCommunityInterface, error) {
+        var is_sticky bool
+        switch args[1] {
+        case "0":
+                is_sticky = true
+        case "1":
+                is_sticky = false
+        default:
+                return nil, fmt.Errorf("invalid mobility")
+        }
+        sequence, err  := strconv.Atoi(args[1])
+        if err != nil {
+                return nil, fmt.Errorf("invalid mobility")
+        }
+        return []bgp.ExtendedCommunityInterface{bgp.NewMacMobilityExtended(uint32(sequence), is_sticky)}, nil
+}
+
 func encapParser(args []string) ([]bgp.ExtendedCommunityInterface, error) {
 	if len(args) < 2 || args[0] != ExtCommNameMap[ENCAP] {
 		return nil, fmt.Errorf("invalid encap")
@@ -253,6 +273,7 @@ var ExtCommParserMap = map[ExtCommType]func([]string) ([]bgp.ExtendedCommunityIn
 	NOT_FOUND: validationParser,
 	INVALID:   validationParser,
         COLOR:     colorParser,
+	MOBILITY:  mobilityParcer,
 }
 
 func ParseExtendedCommunities(input string) ([]bgp.ExtendedCommunityInterface, error) {
