@@ -9,7 +9,7 @@ const _ESIType_name = "ESI_ARBITRARYESI_LACPESI_MSTPESI_MACESI_ROUTERIDESI_AS"
 var _ESIType_index = [...]uint8{0, 13, 21, 29, 36, 48, 54}
 
 func (i ESIType) String() string {
-	if i+1 >= ESIType(len(_ESIType_index)) {
+	if i >= ESIType(len(_ESIType_index)-1) {
 		return fmt.Sprintf("ESIType(%d)", i)
 	}
 	return _ESIType_name[_ESIType_index[i]:_ESIType_index[i+1]]
