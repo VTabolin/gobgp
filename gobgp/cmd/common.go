@@ -25,10 +25,10 @@ import (
 	"strconv"
 	"strings"
 
-	cli "github.com/osrg/gobgp/client"
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/table"
+	cli "github.com/VTabolin/gobgp/client"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/table"
 )
 
 const (

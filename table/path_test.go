@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/osrg/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/packet/bgp"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -19,9 +19,9 @@ import (
 	"testing"
 	"time"
 
-	api "github.com/osrg/gobgp/api"
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/server"
+	api "github.com/VTabolin/gobgp/api"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/server"
 	"github.com/stretchr/testify/assert"
 )
 

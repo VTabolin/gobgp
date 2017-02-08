@@ -22,9 +22,9 @@ import (
 	"testing"
 
 	"github.com/armon/go-radix"
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/table"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/table"
 	"github.com/stretchr/testify/assert"
 )
 

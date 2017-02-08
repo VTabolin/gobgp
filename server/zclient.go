@@ -18,9 +18,9 @@ package server
 import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/table"
-	"github.com/osrg/gobgp/zebra"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/table"
+	"github.com/VTabolin/gobgp/zebra"
 	"net"
 	"strconv"
 	"strings"

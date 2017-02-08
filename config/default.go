@@ -2,9 +2,9 @@ package config
 
 import (
 	"fmt"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/packet/bmp"
-	"github.com/osrg/gobgp/packet/rtr"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/packet/bmp"
+	"github.com/VTabolin/gobgp/packet/rtr"
 	"github.com/spf13/viper"
 	"net"
 )

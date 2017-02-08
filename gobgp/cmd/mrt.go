@@ -22,8 +22,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/osrg/gobgp/packet/mrt"
-	"github.com/osrg/gobgp/table"
+	"github.com/VTabolin/gobgp/packet/mrt"
+	"github.com/VTabolin/gobgp/table"
 	"github.com/spf13/cobra"
 )
 

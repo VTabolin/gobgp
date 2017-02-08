@@ -18,7 +18,7 @@ package bmp
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/osrg/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/packet/bgp"
 	"math"
 	"net"
 )

@@ -22,7 +22,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/osrg/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/packet/bgp"
 )
 
 // Returns config file type by retrieving extension from the given path.

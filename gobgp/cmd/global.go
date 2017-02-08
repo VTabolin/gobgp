@@ -25,9 +25,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/table"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/table"
 	"github.com/spf13/cobra"
 )
 
@@ -635,6 +635,24 @@ func extractLargeCommunity(args []string) ([]string, bgp.PathAttributeInterface,
 	return args, nil, nil
 }
 
+func extractPmsi(args []string) ([]string, bgp.PathAttributeInterface, error) {
+	for idx, arg := range args {
+		if arg == "pmsi" && len(args) > (idx+1) {
+			elems := strings.Split(args[idx+1], ",")
+			id := &bgp.IngressReplTunnelID{
+				Value: net.ParseIP(elems[0]),
+			}
+			i, err := strconv.Atoi(elems[1])
+			if err != nil {
+				return nil, nil, err
+			}
+                        args = append(args[:idx], args[idx+2:]...)
+                        return args, bgp.NewPathAttributePmsiTunnel(bgp.PMSI_TUNNEL_TYPE_INGRESS_REPL, false, uint32(i), id), nil
+                }
+        }
+        return args, nil, nil
+}
+
 func extractAigp(args []string) ([]string, bgp.PathAttributeInterface, error) {
 	for idx, arg := range args {
 		if arg == "aigp" {
@@ -710,6 +728,7 @@ func ParsePath(rf bgp.RouteFamily, args []string) (*table.Path, error) {
 		extractAigp,
 		extractAggregator,
 		extractLargeCommunity,
+                extractPmsi,
 	}
 
 	for _, fn := range fns {

@@ -12,8 +12,8 @@ modern environment and implemented in a modern programming language,
 Installing GoBGP is quite easy (only two commands!):
 
 ```bash
-$ go get github.com/osrg/gobgp/gobgpd
-$ go get github.com/osrg/gobgp/gobgp
+$ go get github.com/VTabolin/gobgp/gobgpd
+$ go get github.com/VTabolin/gobgp/gobgp
 ```
 
 No dependency hell (library, package, etc) thanks to Go.
@@ -22,10 +22,17 @@ No dependency hell (library, package, etc) thanks to Go.
 
 ## Simple CLI EVPN inject
 
-gobgp global rib add -a evpn macadv 32:77:ad:6a:22:a9 192.168.8.109 0 1677141 rd 65534:54880 encap vxlan
-color 105553116266496 color 37383395344384 color 17592186059776 mobility 0 nexthop 10.10.10.5
+for macadv type
+
+gobgp global rib add -a evpn macadv 32:77:ad:6a:22:a9 192.168.7.109 0 3123927 rd 65534:394 rt 65534:394
+encap vxlan mobility 0 color 105553116266496 color 37383395344384 color 17592186055680 nexthop 172.17.50.52
+origin igp med 0
 
 color must be at DEC format
+for multicast push type
+
+gobgp global rib add -a evpn multicast 172.17.50.52 0 rd 65534:394 rt 65534:394 encap vxlan label 3123927
+origin igp pmsi 172.17.50.52,3123927
 
 ### Using GoBGP
 

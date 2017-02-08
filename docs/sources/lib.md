@@ -13,11 +13,11 @@ package main
 import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
-	api "github.com/osrg/gobgp/api"
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/packet/bgp"
-	gobgp "github.com/osrg/gobgp/server"
-	"github.com/osrg/gobgp/table"
+	api "github.com/VTabolin/gobgp/api"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	gobgp "github.com/VTabolin/gobgp/server"
+	"github.com/VTabolin/gobgp/table"
 	"time"
 )
 

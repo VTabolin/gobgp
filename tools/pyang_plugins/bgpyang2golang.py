@@ -727,7 +727,7 @@ def generate_header(ctx):
     print 'import ('
     print '"fmt"'
     print ''
-    print '"github.com/osrg/gobgp/packet/bgp"'
+    print '"github.com/VTabolin/gobgp/packet/bgp"'
     print ')'
     print ''
 

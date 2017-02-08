@@ -27,10 +27,10 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/osrg/gobgp/config"
-	"github.com/osrg/gobgp/packet/bgp"
-	"github.com/osrg/gobgp/server"
-	"github.com/osrg/gobgp/table"
+	"github.com/VTabolin/gobgp/config"
+	"github.com/VTabolin/gobgp/packet/bgp"
+	"github.com/VTabolin/gobgp/server"
+	"github.com/VTabolin/gobgp/table"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
