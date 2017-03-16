@@ -1642,15 +1642,21 @@ type EthernetSegmentIdentifier struct {
 }
 
 func (esi *EthernetSegmentIdentifier) DecodeFromBytes(data []byte) error {
-	esi.Type = ESIType(data[0])
-	esi.Value = data[1:10]
-	switch esi.Type {
-	case ESI_LACP, ESI_MSTP, ESI_ROUTERID, ESI_AS:
-		if esi.Value[8] != 0x00 {
-			return NewMessageError(BGP_ERROR_UPDATE_MESSAGE_ERROR, BGP_ERROR_SUB_MALFORMED_ATTRIBUTE_LIST, nil, fmt.Sprintf("invalid %s. last octet must be 0x00 (0x%02x)", esi.Type.String(), esi.Value[8]))
-		}
-	}
-	return nil
+        esi.Type = ESIType(data[0])
+        if data[0] > 250 {
+                for i := 1; i < 10; i++ {
+                        data[i] = 0 }
+                esi.Value = data[1:10]
+        } else {
+                esi.Value = data[1:10]
+        }
+        switch esi.Type {
+        case ESI_LACP, ESI_MSTP, ESI_ROUTERID, ESI_AS:
+                if esi.Value[8] != 0x00 {
+                        return NewMessageError(BGP_ERROR_UPDATE_MESSAGE_ERROR, BGP_ERROR_SUB_MALFORMED_ATTRIBUTE_LIST, nil, fmt.Sprintf("invalid %s. last octet must be 0x00 (0x%02x)", esi$
+                }
+        }
+        return nil
 }
 
 func (esi *EthernetSegmentIdentifier) Serialize() ([]byte, error) {
